@@ -1,9 +1,13 @@
+import MainLayout from "./layouts/MainLayout";
+
 function App() {
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center">
-      <h1 className="text-4xl font-bold text-blue-600">
-        Coding Community</h1>
-    </div>
+    <MainLayout>
+      <div className="flex min-h-screen items-center justify-center">
+        <h1 className="text-4xl font-bold text-blue-600">
+          Coding Community</h1>
+      </div>
+    </MainLayout>
   );
 }
 
