@@ -1,12 +1,10 @@
 import MainLayout from "./layouts/MainLayout";
+import AppRouter from "./routes/AppRouter";
 
 function App() {
   return (
     <MainLayout>
-      <div className="flex min-h-screen items-center justify-center">
-        <h1 className="text-4xl font-bold text-blue-600">
-          Coding Community</h1>
-      </div>
+      <AppRouter />
     </MainLayout>
   );
 }
