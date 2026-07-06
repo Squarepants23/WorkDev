@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import Logo from "../Logo/Logo";
+import Button from "../Button/Button";
 
 function Navbar() {
   return (
@@ -14,11 +15,8 @@ function Navbar() {
           <Link to="/about">About</Link>
         </div>
 
-        <Link
-          to="/login"
-          className="rounded-lg bg-blue-600 px-4 py-2 text-white transition hover:bg-blue-700"
-        >
-          Login
+        <Link to="/login">
+            <Button>Login</Button>
         </Link>
       </div>
     </nav>

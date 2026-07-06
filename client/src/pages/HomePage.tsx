@@ -1,10 +1,31 @@
+import Container from "../components/Container/Container";
+import Button from "../components/Button/Button";
+
 function HomePage() {
   return (
-    <div className="flex min-h-screen items-center justify-center">
-      <h1 className="text-4xl font-bold text-blue-600">
-        Welcome to WorkDev
-      </h1>
-    </div>
+    <Container>
+      <section className="flex min-h-[calc(100vh-64px)] flex-col items-center justify-center text-center">
+        <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-blue-600">
+          Welcome to Coding Community
+        </p>
+
+        <h1 className="mb-6 text-5xl font-bold text-gray-900">WorkDev</h1>
+
+        <p className="mb-8 max-w-2xl text-lg text-gray-600">
+          Komunitas coding untuk belajar, berkolaborasi, dan membangun project
+          bersama. Semua anggota dapat saling mengenal, berbagi pengalaman, dan
+          mengembangkan karya secara terbuka.
+        </p>
+
+        <div className="flex flex-wrap justify-center gap-4">
+          <Button>Explore Members</Button>
+
+          <button className="rounded-lg border border-gray-300 px-5 py-2.5 font-medium transition hover:bg-gray-100">
+            View Projects
+          </button>
+        </div>
+      </section>
+    </Container>
   );
 }
 
