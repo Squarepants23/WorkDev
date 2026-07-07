@@ -5,6 +5,7 @@ import MembersPage from "../pages/MembersPage";
 import ProjectsPage from "../pages/ProjectsPage";
 import AboutPage from "../pages/AboutPage";
 import LoginPage from "../pages/LoginPage";
+import RegisterPage from "../pages/RegisterPage";
 import DashboardPage from "../pages/DashboardPage";
 import NotFoundPage from "../pages/NotFoundPage";
 import ProjectDetailPage from "../pages/ProjectDetailPage";
@@ -18,6 +19,7 @@ function AppRouter() {
       <Route path="/projects/:id" element={<ProjectDetailPage />} />
       <Route path="/about" element={<AboutPage />} />
       <Route path="/login" element={<LoginPage />} />
+      <Route path="/register" element={<RegisterPage />} />
       <Route path="/dashboard" element={<DashboardPage />} />
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
