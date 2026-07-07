@@ -14,6 +14,42 @@ function RegisterPage() {
 
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [agreeTerms, setAgreeTerms] = useState(false);
+  function handleSubmit(e: React.FormEvent) {
+  e.preventDefault();
+
+  if (!fullName.trim()) {
+    alert("Full Name wajib diisi.");
+    return;
+  }
+
+  if (!username.trim()) {
+    alert("Username wajib diisi.");
+    return;
+  }
+
+  if (!email.trim()) {
+    alert("Email wajib diisi.");
+    return;
+  }
+
+  if (password.length < 8) {
+    alert("Password minimal 8 karakter.");
+    return;
+  }
+
+  if (password !== confirmPassword) {
+    alert("Konfirmasi password tidak sama.");
+    return;
+  }
+
+  if (!agreeTerms) {
+    alert("Silakan setujui Terms & Privacy Policy.");
+    return;
+  }
+
+  alert("Register berhasil (sementara, backend belum dibuat).");
+}
 
   return (
     <Container>
@@ -28,7 +64,10 @@ function RegisterPage() {
             Bergabung dengan komunitas developer WorkDev.
           </p>
 
-          <form className="space-y-5">
+          <form 
+            onSubmit={handleSubmit}
+            className="space-y-5"
+          >
 
             {/* Full Name */}
             <div>
@@ -131,7 +170,7 @@ function RegisterPage() {
 
         {/* Terms & Privacy */}
         <div className="flex items-start gap-2 text-sm">
-          <input type="checkbox" className="mt-1" />
+          <input type="checkbox" checked={agreeTerms} onChange={(e) => setAgreeTerms(e.target.checked)} className="mt-1" />
 
           <p className="text-gray-600">
             I agree to the{" "}
@@ -151,7 +190,7 @@ function RegisterPage() {
           </p>
         </div>
 
-        <Button>
+        <Button type="submit">
           Create Account
         </Button>
 
