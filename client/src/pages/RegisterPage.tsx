@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { HiEye, HiEyeOff } from "react-icons/hi";
-import { FaGoogle, FaGithub } from "react-icons/fa";
 
 import Container from "../components/Container/Container";
 import Button from "../components/Button/Button";
@@ -130,7 +129,43 @@ function RegisterPage() {
           </div>
         </div>
 
-          </form>
+        {/* Terms & Privacy */}
+        <div className="flex items-start gap-2 text-sm">
+          <input type="checkbox" className="mt-1" />
+
+          <p className="text-gray-600">
+            I agree to the{" "}
+            <button
+              type="button"
+              className="text-blue-600 hover:underline"
+            >
+              Terms
+            </button>{" "}
+            &{" "}
+            <button
+              type="button"
+              className="text-blue-600 hover:underline"
+            >
+              Privacy Policy
+            </button>
+          </p>
+        </div>
+
+        <Button>
+          Create Account
+        </Button>
+
+      </form>
+
+      <p className="mt-6 text-center text-gray-600">
+        Already have an account?{" "}
+        <Link
+          to="/login"
+          className="font-semibold text-blue-600 hover:underline"
+        >
+          Login
+        </Link>
+      </p>
 
         </div>
       </section>
