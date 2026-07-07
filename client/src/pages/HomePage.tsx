@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Container from "../components/Container/Container";
 import Button from "../components/Button/Button";
 import Stats from "../components/Stats/Stats";
@@ -25,11 +26,15 @@ function HomePage() {
         </p>
 
         <div className="flex flex-wrap justify-center gap-4">
+         <Link to="/members"> 
           <Button>Explore Members</Button>
+         </Link>
 
+         <Link to="/projects"> 
           <button className="rounded-lg border border-gray-300 px-5 py-2.5 font-medium transition hover:bg-gray-100">
             View Projects
           </button>
+         </Link>
         </div>
       </section>
 
