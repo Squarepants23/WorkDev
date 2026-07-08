@@ -1,4 +1,5 @@
 import type { Request, Response } from "express";
+import type { AuthRequest } from "../middleware/authMiddleware";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
@@ -82,6 +83,26 @@ export async function login(req: Request, res: Response) {
       token,
       user,
     });
+  } catch (error) {
+    console.error(error);
+
+    res.status(500).json({
+      message: "Terjadi kesalahan pada server.",
+    });
+  }
+}
+
+export async function me(req: AuthRequest, res: Response) {
+  try {
+    const user = await User.findById(req.user?.id).select("-password");
+
+    if (!user) {
+      return res.status(404).json({
+        message: "User tidak ditemukan.",
+      });
+    }
+
+    res.status(200).json(user);
   } catch (error) {
     console.error(error);
 
