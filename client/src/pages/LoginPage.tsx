@@ -1,15 +1,53 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { HiEye, HiEyeOff } from "react-icons/hi";
 import { FaGoogle, FaGithub } from "react-icons/fa";
 
 import Container from "../components/Container/Container";
 import Button from "../components/Button/Button";
 
+import { login } from "../services/authService";
+
 function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+
+async function handleSubmit(e: React.FormEvent) {
+  e.preventDefault();
+
+  if (!email.trim()) {
+    alert("Email wajib diisi.");
+    return;
+  }
+
+  if (!password.trim()) {
+    alert("Password wajib diisi.");
+    return;
+  }
+
+  try {
+    setLoading(true);
+
+    const data = await login({
+      email,
+      password,
+    });
+
+    localStorage.setItem("token", data.token);
+
+    alert("Login berhasil!");
+
+    navigate("/");
+  } catch (error) {
+    console.error(error);
+    alert("Login gagal.");
+  } finally {
+    setLoading(false);
+  }
+}
 
   return (
     <Container>
@@ -24,7 +62,10 @@ function LoginPage() {
             Login ke akun WorkDev.
           </p>
 
-          <form className="space-y-5">
+          <form 
+            onSubmit={handleSubmit}
+            className="space-y-5"
+          >
 
             <div>
               <label className="mb-2 block font-medium">
@@ -80,8 +121,11 @@ function LoginPage() {
 
             </div>
 
-            <Button>
-              Login
+            <Button
+              type="submit"
+              disabled={loading}
+            >
+              {loading ? "Logging in..." : "Login"}
             </Button>
 
             <div className="flex items-center gap-4">
