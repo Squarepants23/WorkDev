@@ -61,6 +61,11 @@ const userSchema = new mongoose.Schema(
       default: "",
     },
 
+    linktree: {
+  type: String,
+  default: "",
+},
+
     portfolio: {
       type: String,
       default: "",

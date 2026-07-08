@@ -26,3 +26,24 @@ export async function getMe() {
 
   return response.data;
 }
+
+export async function updateProfile(data: {
+  fullName: string;
+  username: string;
+  bio: string;
+  location: string;
+  github: string;
+  linkedin: string;
+  linktree: string;
+  portfolio: string;
+}) {
+  const token = localStorage.getItem("token");
+
+  const response = await api.put("/auth/me", data, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  return response.data;
+}

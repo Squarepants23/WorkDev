@@ -115,3 +115,52 @@ export async function me(req: AuthRequest, res: Response) {
     });
   }
 }
+
+export async function updateProfile(req: AuthRequest, res: Response) {
+  try {
+    const {
+      fullName,
+      username,
+      bio,
+      location,
+      github,
+      linkedin,
+      linktree,
+      portfolio,
+    } = req.body;
+
+    const user = await User.findByIdAndUpdate(
+      req.user?.id,
+      {
+        fullName,
+        username,
+        bio,
+        location,
+        github,
+        linkedin,
+        linktree,
+        portfolio,
+      },
+      {
+        new: true,
+      }
+    ).select("-password");
+
+    if (!user) {
+      return res.status(404).json({
+        message: "User tidak ditemukan.",
+      });
+    }
+
+    res.status(200).json({
+      message: "Profile berhasil diperbarui.",
+      user,
+    });
+  } catch (error) {
+    console.error(error);
+
+    res.status(500).json({
+      message: "Terjadi kesalahan pada server.",
+    });
+  }
+}

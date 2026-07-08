@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import ProtectedRoute from "../components/ProtectedRoute/ProtectedRoute"
+import ProtectedRoute from "../components/ProtectedRoute/ProtectedRoute";
 
 import HomePage from "../pages/HomePage";
 import MembersPage from "../pages/MembersPage";
@@ -8,6 +8,8 @@ import AboutPage from "../pages/AboutPage";
 import LoginPage from "../pages/LoginPage";
 import RegisterPage from "../pages/RegisterPage";
 import DashboardPage from "../pages/DashboardPage";
+import MyProfilePage from "../pages/MyProfilePage";
+import EditProfilePage from "../pages/EditProfilePage";
 import NotFoundPage from "../pages/NotFoundPage";
 import ProjectDetailPage from "../pages/ProjectDetailPage";
 
@@ -21,14 +23,16 @@ function AppRouter() {
       <Route path="/about" element={<AboutPage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
-      <Route 
+      <Route
         path="/dashboard"
         element={
           <ProtectedRoute>
             <DashboardPage />
           </ProtectedRoute>
         }
-      />  
+      />
+      <Route path="/dashboard/profile" element={<MyProfilePage />} />
+      <Route path="/dashboard/profile/edit" element={<EditProfilePage />} />
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );
