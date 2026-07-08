@@ -34,6 +34,37 @@ const userSchema = new mongoose.Schema(
       enum: ["user", "admin"],
       default: "user",
     },
+
+    avatar: {
+      type: String,
+      default: "",
+    },
+
+    bio: {
+      type: String,
+      default: "",
+      maxlength: 300,
+    },
+
+    location: {
+      type: String,
+      default: "",
+    },
+
+    github: {
+      type: String,
+      default: "",
+    },
+
+    linkedin: {
+      type: String,
+      default: "",
+    },
+
+    portfolio: {
+      type: String,
+      default: "",
+    },
   },
   {
     timestamps: true,

@@ -35,6 +35,8 @@ export function verifyToken(
       process.env.JWT_SECRET || "workdev-super-secret-key"
     ) as jwt.JwtPayload;
 
+    console.log("Decoded Token:", decoded);
+
     req.user = {
       id: decoded.id as string,
       role: decoded.role as string,

@@ -67,6 +67,8 @@ export async function login(req: Request, res: Response) {
       });
     }
 
+    console.log("User login _id:", user._id);
+
     const token = jwt.sign(
       {
         id: user._id,
@@ -94,6 +96,8 @@ export async function login(req: Request, res: Response) {
 
 export async function me(req: AuthRequest, res: Response) {
   try {
+    console.log("User ID dari token:", req.user?.id);
+
     const user = await User.findById(req.user?.id).select("-password");
 
     if (!user) {

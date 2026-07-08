@@ -1,11 +1,30 @@
 import { useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { HiMenu, HiX } from "react-icons/hi";
 import Logo from "../Logo/Logo";
 import Button from "../Button/Button";
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const token = localStorage.getItem("token");
+
+  const isLoggedIn = !!token;
+
+  function handleLogout() {
+    const confirmLogout = window.confirm("Apakah Anda yakin ingin logout?");
+
+    if (!confirmLogout) {
+      return;
+    }
+
+    localStorage.removeItem("token");
+
+    navigate("/login");
+
+    window.location.reload();
+  }
 
   return (
     <nav className="border-b border-gray-200 bg-white">
@@ -65,10 +84,26 @@ function Navbar() {
           </NavLink>
         </div>
 
-        <div className="hidden md:block">
-          <Link to="/login">
-            <Button>Login</Button>
-          </Link>
+        <div className="hidden items-center gap-3 md:flex">
+          {isLoggedIn ? (
+            <>
+              <Link to="/dashboard">
+                <Button>Dashboard</Button>
+              </Link>
+
+              <Button onClick={handleLogout}>Logout</Button>
+            </>
+          ) : (
+            <>
+              <Link to="/login">
+                <Button>Login</Button>
+              </Link>
+
+              <Link to="/register">
+                <Button>Register</Button>
+              </Link>
+            </>
+          )}
         </div>
       </div>
 
@@ -91,9 +126,32 @@ function Navbar() {
               About
             </Link>
 
-            <Link to="/login" onClick={() => setIsOpen(false)}>
-              <Button>Login</Button>
-            </Link>
+            {isLoggedIn ? (
+              <>
+                <Link to="/dashboard" onClick={() => setIsOpen(false)}>
+                  <Button>Dashboard</Button>
+                </Link>
+
+                <Button
+                  onClick={() => {
+                    handleLogout();
+                    setIsOpen(false);
+                  }}
+                >
+                  Logout
+                </Button>
+              </>
+            ) : (
+              <>
+                <Link to="/login" onClick={() => setIsOpen(false)}>
+                  <Button>Login</Button>
+                </Link>
+
+                <Link to="/register" onClick={() => setIsOpen(false)}>
+                  <Button>Register</Button>
+                </Link>
+              </>
+            )}
           </div>
         </div>
       )}
