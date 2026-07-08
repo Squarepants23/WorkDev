@@ -10,10 +10,19 @@ export async function register(data: {
   return response.data;
 }
 
-export async function login(data: {
-  email: string;
-  password: string;
-}) {
+export async function login(data: { email: string; password: string }) {
   const response = await api.post("/auth/login", data);
+  return response.data;
+}
+
+export async function getMe() {
+  const token = localStorage.getItem("token");
+
+  const response = await api.get("/auth/me", {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
   return response.data;
 }
