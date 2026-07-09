@@ -3,6 +3,7 @@ import ProtectedRoute from "../components/ProtectedRoute/ProtectedRoute";
 
 import HomePage from "../pages/HomePage";
 import MembersPage from "../pages/MembersPage";
+import MemberDetailPage from "../pages/MemberDetailPage";
 import ProjectsPage from "../pages/ProjectsPage";
 import AboutPage from "../pages/AboutPage";
 import LoginPage from "../pages/LoginPage";
@@ -18,6 +19,7 @@ function AppRouter() {
     <Routes>
       <Route path="/" element={<HomePage />} />
       <Route path="/members" element={<MembersPage />} />
+      <Route path="/members/:id" element={<MemberDetailPage />} />
       <Route path="/projects" element={<ProjectsPage />} />
       <Route path="/projects/:id" element={<ProjectDetailPage />} />
       <Route path="/about" element={<AboutPage />} />

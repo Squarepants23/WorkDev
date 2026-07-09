@@ -1,12 +1,9 @@
-import type { Response } from "express";
+import type { Request, Response } from "express";
 
 import User from "../models/User";
 import type { AuthRequest } from "../middleware/authMiddleware";
 
-export async function getProfile(
-  req: AuthRequest,
-  res: Response
-) {
+export async function getProfile(req: AuthRequest, res: Response) {
   try {
     const user = await User.findById(req.user?.id).select("-password");
 
@@ -26,20 +23,10 @@ export async function getProfile(
   }
 }
 
-export async function updateProfile(
-  req: AuthRequest,
-  res: Response
-) {
+export async function updateProfile(req: AuthRequest, res: Response) {
   try {
-    const {
-      fullName,
-      username,
-      bio,
-      location,
-      github,
-      linkedin,
-      portfolio,
-    } = req.body;
+    const { fullName, username, bio, location, github, linkedin, linktree, portfolio } =
+      req.body;
 
     const user = await User.findById(req.user?.id);
 
@@ -55,6 +42,7 @@ export async function updateProfile(
     user.location = location ?? user.location;
     user.github = github ?? user.github;
     user.linkedin = linkedin ?? user.linkedin;
+    user.linktree = linktree ?? user.linktree;
     user.portfolio = portfolio ?? user.portfolio;
 
     await user.save();
@@ -72,16 +60,33 @@ export async function updateProfile(
   }
 }
 
-export async function getAllUsers(
-  _req: AuthRequest,
-  res: Response
-) {
+export async function getAllUsers(_req: AuthRequest, res: Response) {
   try {
     const users = await User.find({})
       .select("-password")
       .sort({ createdAt: -1 });
 
     return res.json(users);
+  } catch (error) {
+    console.error(error);
+
+    return res.status(500).json({
+      message: "Terjadi kesalahan server.",
+    });
+  }
+}
+
+export async function getUserById(req: Request, res: Response) {
+  try {
+    const user = await User.findById(req.params.id).select("-password");
+
+    if (!user) {
+      return res.status(404).json({
+        message: "User tidak ditemukan.",
+      });
+    }
+
+    return res.json(user);
   } catch (error) {
     console.error(error);
 

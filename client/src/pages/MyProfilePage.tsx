@@ -82,24 +82,61 @@ function MyProfilePage() {
             <p className="text-gray-600">{user.location || "Belum diisi"}</p>
           </div>
 
-          <div>
-            <p className="font-semibold">GitHub</p>
-            <p className="text-gray-600">{user.github || "Belum diisi"}</p>
-          </div>
+          <div className="space-y-3">
+            <p className="font-semibold text-lg">Social Media</p>
 
-          <div>
-            <p className="font-semibold">LinkedIn</p>
-            <p className="text-gray-600">{user.linkedin || "Belum diisi"}</p>
-          </div>
+            {user.github && (
+              <a
+                href={user.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block text-blue-600 hover:underline"
+              >
+                GitHub
+              </a>
+            )}
 
-          <div>
-            <p className="font-semibold">Linktree</p>
-            <p className="text-gray-600">{user.linktree || "Belum diisi"}</p>
-          </div>
+            {user.linkedin && (
+              <a
+                href={user.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block text-blue-600 hover:underline"
+              >
+                LinkedIn
+              </a>
+            )}
 
-          <div>
-            <p className="font-semibold">Portfolio</p>
-            <p className="text-gray-600">{user.portfolio || "Belum diisi"}</p>
+            {user.linktree && (
+              <a
+                href={user.linktree}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block text-blue-600 hover:underline"
+              >
+                Linktree
+              </a>
+            )}
+
+            {user.portfolio && (
+              <a
+                href={user.portfolio}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block text-blue-600 hover:underline"
+              >
+                Portfolio
+              </a>
+            )}
+
+            {!user.github &&
+              !user.linkedin &&
+              !user.linktree &&
+              !user.portfolio && (
+                <p className="text-gray-500">
+                  Belum ada social media yang ditambahkan.
+                </p>
+              )}
           </div>
         </div>
 
