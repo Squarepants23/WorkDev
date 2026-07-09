@@ -71,3 +71,22 @@ export async function updateProfile(
     });
   }
 }
+
+export async function getAllUsers(
+  _req: AuthRequest,
+  res: Response
+) {
+  try {
+    const users = await User.find({})
+      .select("-password")
+      .sort({ createdAt: -1 });
+
+    return res.json(users);
+  } catch (error) {
+    console.error(error);
+
+    return res.status(500).json({
+      message: "Terjadi kesalahan server.",
+    });
+  }
+}

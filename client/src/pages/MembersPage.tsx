@@ -1,45 +1,42 @@
-import { useState } from "react";
-
+import { useEffect, useState } from "react";
+import api from "../api/axios";
 import Container from "../components/Container/Container";
 import MemberCard from "../components/MemberCard/MemberCard";
+
+interface Member {
+  _id: string;
+  fullName: string;
+  username: string;
+  bio?: string;
+  location?: string;
+  role: string;
+  avatar?: string;
+}
 
 function MembersPage() {
   const [search, setSearch] = useState("");
   const [roleFilter, setRoleFilter] = useState("All");
+  const [members, setMembers] = useState<Member[]>([]);
 
-  const members = [
-    {
-      id: 1,
-      name: "Rifqi Faizal",
-      role: "Frontend Developer",
-      category: "Frontend",
-      level: "Intermediate",
-      skills: ["React", "TypeScript", "Tailwind"],
-    },
-    {
-      id: 2,
-      name: "John Doe",
-      role: "Backend Developer",
-      category: "Backend",
-      level: "Beginner",
-      skills: ["Node.js", "Express", "MongoDB"],
-    },
-    {
-      id: 3,
-      name: "Jane Smith",
-      role: "UI/UX Designer",
-      category: "UI/UX",
-      level: "Expert",
-      skills: ["Figma", "UI Design", "UX Research"],
-    },
-  ];
+  useEffect(() => {
+    async function fetchMembers() {
+      try {
+        const response = await api.get("/users");
+        setMembers(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    fetchMembers();
+  }, []);
 
   const filteredMembers = members.filter((member) => {
-    const matchSearch =
-  member.name.toLowerCase().includes(search.toLowerCase());
+    const matchSearch = member.fullName
+      .toLowerCase()
+      .includes(search.toLowerCase());
 
-    const matchRole =
-      roleFilter === "All" || member.category === roleFilter;
+    const matchRole = roleFilter === "All" || member.role === roleFilter;
 
     return matchSearch && matchRole;
   });
@@ -81,11 +78,14 @@ function MembersPage() {
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {filteredMembers.map((member) => (
             <MemberCard
-              key={member.id}
-              name={member.name}
+              key={member._id}
+              id={member._id}
+              name={member.fullName}
+              username={member.username}
               role={member.role}
-              level={member.level}
-              skills={member.skills}
+              bio={member.bio}
+              location={member.location}
+              avatar={member.avatar}
             />
           ))}
         </div>
