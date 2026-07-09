@@ -28,12 +28,18 @@ const projectSchema = new mongoose.Schema(
       default: [],
     },
 
-    github: {
+    status: {
+      type: String,
+      enum: ["Planning", "Ongoing", "Completed"],
+      default: "Planning",
+    },
+
+    repositoryUrl: {
       type: String,
       default: "",
     },
 
-    demo: {
+    projectUrl: {
       type: String,
       default: "",
     },
@@ -46,7 +52,7 @@ const projectSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
-  }
+  },
 );
 
 export default mongoose.model("Project", projectSchema);

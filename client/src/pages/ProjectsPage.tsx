@@ -10,6 +10,7 @@ interface Project {
   description: string;
   status?: string;
   techStack: string[];
+  thumbnail?: string;
   github?: string;
   demo?: string;
 }
@@ -54,10 +55,12 @@ function ProjectsPage() {
             {projects.map((project) => (
               <ProjectCard
                 key={project._id}
+                id={project._id}
                 title={project.title}
                 description={project.description}
                 status={project.status ?? "Completed"}
                 techStack={project.techStack}
+                thumbnail={project.thumbnail}
               />
             ))}
           </div>
