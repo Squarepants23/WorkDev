@@ -1,16 +1,36 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { HiMenu, HiX } from "react-icons/hi";
 import Logo from "../Logo/Logo";
 import Button from "../Button/Button";
+import { getMe } from "../../services/authService";
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [avatar, setAvatar] = useState("");
+
   const navigate = useNavigate();
 
   const token = localStorage.getItem("token");
 
   const isLoggedIn = !!token;
+  useEffect(() => {
+    async function fetchUser() {
+      if (!token) return;
+
+      try {
+        const user = await getMe();
+
+        if (user.avatar) {
+          setAvatar(`http://localhost:5000${user.avatar}`);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    fetchUser();
+  }, [token]);
 
   function handleLogout() {
     const confirmLogout = window.confirm("Apakah Anda yakin ingin logout?");
@@ -87,6 +107,20 @@ function Navbar() {
         <div className="hidden items-center gap-3 md:flex">
           {isLoggedIn ? (
             <>
+              <Link to="/dashboard/profile">
+                {avatar ? (
+                  <img
+                    src={avatar}
+                    alt="Avatar"
+                    className="h-10 w-10 rounded-full border-2 border-blue-500 object-cover cursor-pointer"
+                  />
+                ) : (
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-600 font-bold text-white">
+                    U
+                  </div>
+                )}
+              </Link>
+
               <Link to="/dashboard">
                 <Button>Dashboard</Button>
               </Link>
@@ -128,18 +162,25 @@ function Navbar() {
 
             {isLoggedIn ? (
               <>
-                <Link to="/dashboard" onClick={() => setIsOpen(false)}>
+                <Link to="/dashboard/profile">
+                  {avatar ? (
+                    <img
+                      src={avatar}
+                      alt="Avatar"
+                      className="h-10 w-10 rounded-full border-2 border-blue-500 object-cover transition hover:scale-105"
+                    />
+                  ) : (
+                    <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-600 font-bold text-white">
+                      U
+                    </div>
+                  )}
+                </Link>
+
+                <Link to="/dashboard">
                   <Button>Dashboard</Button>
                 </Link>
 
-                <Button
-                  onClick={() => {
-                    handleLogout();
-                    setIsOpen(false);
-                  }}
-                >
-                  Logout
-                </Button>
+                <Button onClick={handleLogout}>Logout</Button>
               </>
             ) : (
               <>

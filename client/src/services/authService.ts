@@ -1,4 +1,5 @@
 import api from "../api/axios";
+import axios from "axios";
 
 export async function register(data: {
   fullName: string;
@@ -44,6 +45,26 @@ export async function updateProfile(data: {
       Authorization: `Bearer ${token}`,
     },
   });
+
+  return response.data;
+}
+
+export async function uploadAvatar(file: File) {
+  const token = localStorage.getItem("token");
+
+  const formData = new FormData();
+
+  formData.append("avatar", file);
+
+  const response = await axios.post(
+    "http://localhost:5000/api/auth/avatar",
+    formData,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
 
   return response.data;
 }

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { getMe } from "../services/authService";
 
@@ -10,6 +11,7 @@ type User = {
 };
 
 function DashboardPage() {
+  const navigate = useNavigate();
   const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
@@ -47,6 +49,15 @@ function DashboardPage() {
         <p>
           <strong>Role:</strong> {user.role}
         </p>
+
+        <div className="mt-6">
+          <button
+            onClick={() => navigate("/dashboard/profile")}
+            className="rounded-lg bg-blue-600 px-5 py-2 font-semibold text-white transition hover:bg-blue-700"
+          >
+            My Profile
+          </button>
+        </div>
       </div>
     </div>
   );

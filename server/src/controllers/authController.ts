@@ -2,6 +2,8 @@ import type { Request, Response } from "express";
 import type { AuthRequest } from "../middleware/authMiddleware";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import fs from "fs";
+import path from "path";
 
 import User from "../models/User";
 
@@ -77,7 +79,7 @@ export async function login(req: Request, res: Response) {
       process.env.JWT_SECRET || "workdev-secret",
       {
         expiresIn: "7d",
-      }
+      },
     );
 
     res.status(200).json({
@@ -143,7 +145,7 @@ export async function updateProfile(req: AuthRequest, res: Response) {
       },
       {
         new: true,
-      }
+      },
     ).select("-password");
 
     if (!user) {
@@ -155,6 +157,49 @@ export async function updateProfile(req: AuthRequest, res: Response) {
     res.status(200).json({
       message: "Profile berhasil diperbarui.",
       user,
+    });
+  } catch (error) {
+    console.error(error);
+
+    res.status(500).json({
+      message: "Terjadi kesalahan pada server.",
+    });
+  }
+}
+
+export async function uploadAvatar(req: AuthRequest, res: Response) {
+  try {
+    const user = await User.findById(req.user?.id);
+
+    if (!user) {
+      return res.status(404).json({
+        message: "User tidak ditemukan.",
+      });
+    }
+
+    if (!req.file) {
+      return res.status(400).json({
+        message: "Silakan pilih gambar.",
+      });
+    }
+
+    // Hapus foto lama jika ada
+    if (user.avatar) {
+      const oldPath = path.join(process.cwd(), user.avatar.replace(/^\//, ""));
+
+      if (fs.existsSync(oldPath)) {
+        fs.unlinkSync(oldPath);
+      }
+    }
+
+    // Simpan foto baru
+    user.avatar = `/uploads/avatars/${req.file.filename}`;
+
+    await user.save();
+
+    res.status(200).json({
+      message: "Foto profil berhasil diperbarui.",
+      avatar: user.avatar,
     });
   } catch (error) {
     console.error(error);

@@ -49,9 +49,17 @@ function MyProfilePage() {
 
       <div className="rounded-2xl border bg-white p-8 shadow-lg">
         <div className="flex flex-col items-center">
-          <div className="mb-4 flex h-28 w-28 items-center justify-center rounded-full bg-blue-600 text-4xl font-bold text-white">
-            {user.fullName.charAt(0)}
-          </div>
+          {user.avatar ? (
+            <img
+              src={`http://localhost:5000${user.avatar}`}
+              alt="Avatar"
+              className="mb-4 h-28 w-28 rounded-full border-4 border-blue-500 object-cover"
+            />
+          ) : (
+            <div className="mb-4 flex h-28 w-28 items-center justify-center rounded-full bg-blue-600 text-4xl font-bold text-white">
+              {user.fullName.charAt(0)}
+            </div>
+          )}
 
           <h2 className="text-2xl font-bold">{user.fullName}</h2>
 
