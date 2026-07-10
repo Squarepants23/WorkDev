@@ -5,6 +5,7 @@ import HomePage from "../pages/HomePage";
 import MembersPage from "../pages/MembersPage";
 import MemberDetailPage from "../pages/MemberDetailPage";
 import ProjectsPage from "../pages/ProjectsPage";
+import EditProjectPage from "../pages/EditProjectPage";
 import AboutPage from "../pages/AboutPage";
 import LoginPage from "../pages/LoginPage";
 import RegisterPage from "../pages/RegisterPage";
@@ -22,6 +23,7 @@ function AppRouter() {
       <Route path="/members/:id" element={<MemberDetailPage />} />
       <Route path="/projects" element={<ProjectsPage />} />
       <Route path="/projects/:id" element={<ProjectDetailPage />} />
+      <Route path="/projects/:id/edit" element={<EditProjectPage />} />
       <Route path="/about" element={<AboutPage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />

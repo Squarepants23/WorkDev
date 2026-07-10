@@ -84,3 +84,93 @@ export async function createProject(
     });
   }
 }
+
+export async function updateProject(
+  req: AuthRequest,
+  res: Response
+) {
+  try {
+    const { id } = req.params;
+
+    const project = await Project.findById(id);
+
+    if (!project) {
+      return res.status(404).json({
+        message: "Project tidak ditemukan.",
+      });
+    }
+
+    if (project.owner.toString() !== req.user?.id) {
+      return res.status(403).json({
+        message: "Anda tidak memiliki akses.",
+      });
+    }
+
+    project.title = req.body.title;
+    project.description = req.body.description;
+    project.category = req.body.category;
+    project.status = req.body.status;
+
+    project.techStack =
+      typeof req.body.techStack === "string"
+        ? req.body.techStack
+            .split(",")
+            .map((item: string) => item.trim())
+        : req.body.techStack;
+
+    project.repositoryUrl = req.body.repositoryUrl;
+    project.projectUrl = req.body.projectUrl;
+
+    if (req.file) {
+      project.thumbnail = `/uploads/projects/${req.file.filename}`;
+    }
+
+    await project.save();
+
+    return res.json({
+      message: "Project berhasil diperbarui.",
+      project,
+    });
+  } catch (error) {
+    console.error(error);
+
+    return res.status(500).json({
+      message: "Terjadi kesalahan server.",
+    });
+  }
+}
+
+export async function deleteProject(
+  req: AuthRequest,
+  res: Response
+) {
+  try {
+    const { id } = req.params;
+
+    const project = await Project.findById(id);
+
+    if (!project) {
+      return res.status(404).json({
+        message: "Project tidak ditemukan.",
+      });
+    }
+
+    if (project.owner.toString() !== req.user?.id) {
+      return res.status(403).json({
+        message: "Anda tidak memiliki akses.",
+      });
+    }
+
+    await Project.findByIdAndDelete(id);
+
+    return res.json({
+      message: "Project berhasil dihapus.",
+    });
+  } catch (error) {
+    console.error(error);
+
+    return res.status(500).json({
+      message: "Terjadi kesalahan server.",
+    });
+  }
+}
