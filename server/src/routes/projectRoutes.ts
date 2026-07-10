@@ -12,6 +12,7 @@ import {
   createComment,
   getComments,
   deleteComment,
+  updateComment,
 } from "../controllers/commentController";
 
 import { toggleLike, getLikeInfo } from "../controllers/likeController";
@@ -44,5 +45,7 @@ router.get("/:id/comments", getComments);
 router.post("/:id/comments", verifyToken, createComment);
 
 router.delete("/comments/:commentId", verifyToken, deleteComment);
+
+router.put("/comments/:commentId", verifyToken, updateComment);
 
 export default router;

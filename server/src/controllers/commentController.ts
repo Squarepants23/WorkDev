@@ -98,3 +98,42 @@ export async function deleteComment(
     });
   }
 }
+
+export async function updateComment(
+  req: AuthRequest,
+  res: Response
+) {
+  try {
+    const { commentId } = req.params;
+    const { content } = req.body;
+
+    const comment = await Comment.findById(commentId);
+
+    if (!comment) {
+      return res.status(404).json({
+        message: "Komentar tidak ditemukan.",
+      });
+    }
+
+    if (comment.user.toString() !== req.user?.id) {
+      return res.status(403).json({
+        message: "Anda tidak memiliki akses.",
+      });
+    }
+
+    comment.content = content;
+
+    await comment.save();
+
+    return res.json({
+      message: "Komentar berhasil diperbarui.",
+      comment,
+    });
+  } catch (error) {
+    console.error(error);
+
+    return res.status(500).json({
+      message: "Terjadi kesalahan server.",
+    });
+  }
+}

@@ -49,6 +49,9 @@ function ProjectDetailPage() {
   const [comments, setComments] = useState<Comment[]>([]);
   const [comment, setComment] = useState("");
 
+  const [editingCommentId, setEditingCommentId] = useState("");
+  const [editingContent, setEditingContent] = useState("");
+
   useEffect(() => {
     async function fetchProject() {
       try {
@@ -119,6 +122,42 @@ function ProjectDetailPage() {
 
       setComments(response.data);
       setComment("");
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  async function handleDeleteComment(commentId: string) {
+    const confirmed = window.confirm("Yakin ingin menghapus komentar ini?");
+
+    if (!confirmed) return;
+
+    try {
+      await api.delete(`/projects/comments/${commentId}`);
+
+      setComments((prev) =>
+        prev.filter((comment) => comment._id !== commentId),
+      );
+    } catch (error) {
+      console.error(error);
+      alert("Gagal menghapus komentar.");
+    }
+  }
+
+  async function handleUpdateComment() {
+    if (!editingContent.trim()) return;
+
+    try {
+      await api.put(`/projects/comments/${editingCommentId}`, {
+        content: editingContent,
+      });
+
+      const response = await api.get(`/projects/${id}/comments`);
+
+      setComments(response.data);
+
+      setEditingCommentId("");
+      setEditingContent("");
     } catch (error) {
       console.error(error);
     }
@@ -226,16 +265,71 @@ function ProjectDetailPage() {
                         className="h-10 w-10 rounded-full object-cover"
                       />
 
-                      <div>
-                        <h4 className="font-semibold">{item.user.fullName}</h4>
+                      <div className="flex w-full items-start justify-between">
+                        <div>
+                          <h4 className="font-semibold">
+                            {item.user.fullName}
+                          </h4>
 
-                        <p className="text-sm text-gray-500">
-                          @{item.user.username}
-                        </p>
+                          <p className="text-sm text-gray-500">
+                            @{item.user.username}
+                          </p>
+                        </div>
+
+                        {item.user._id === currentUserId && (
+                          <div className="flex gap-3">
+                            <button
+                              onClick={() => {
+                                setEditingCommentId(item._id);
+                                setEditingContent(item.content);
+                              }}
+                              className="text-sm font-medium text-blue-600 hover:text-blue-700"
+                            >
+                              Edit
+                            </button>
+
+                            <button
+                              onClick={() => handleDeleteComment(item._id)}
+                              className="text-sm font-medium text-red-600 hover:text-red-700"
+                            >
+                              Delete
+                            </button>
+                          </div>
+                        )}
                       </div>
                     </div>
 
-                    <p className="mt-3 text-gray-700">{item.content}</p>
+                    {editingCommentId === item._id ? (
+                      <div className="mt-3 space-y-3">
+                        <textarea
+                          value={editingContent}
+                          onChange={(e) => setEditingContent(e.target.value)}
+                          className="w-full rounded-lg border p-3"
+                          rows={3}
+                        />
+
+                        <div className="flex gap-3">
+                          <button
+                            onClick={handleUpdateComment}
+                            className="rounded-lg bg-blue-600 px-4 py-2 text-white"
+                          >
+                            Save
+                          </button>
+
+                          <button
+                            onClick={() => {
+                              setEditingCommentId("");
+                              setEditingContent("");
+                            }}
+                            className="rounded-lg border px-4 py-2"
+                          >
+                            Cancel
+                          </button>
+                        </div>
+                      </div>
+                    ) : (
+                      <p className="mt-3 text-gray-700">{item.content}</p>
+                    )}
                   </div>
                 ))}
               </div>
