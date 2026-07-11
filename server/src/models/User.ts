@@ -23,16 +23,30 @@ const userSchema = new mongoose.Schema(
       trim: true,
     },
 
+    googleId: {
+      type: String,
+      default: "",
+    },
+
+    githubId: {
+      type: String,
+      default: "",
+    },
+
     password: {
       type: String,
-      required: true,
-      minlength: 8,
+      default: "",
     },
 
     role: {
       type: String,
       enum: ["user", "admin"],
       default: "user",
+    },
+
+    developerRole: {
+      type: String,
+      default: "Fullstack",
     },
 
     avatar: {
@@ -62,18 +76,27 @@ const userSchema = new mongoose.Schema(
     },
 
     linktree: {
-  type: String,
-  default: "",
-},
+      type: String,
+      default: "",
+    },
 
     portfolio: {
       type: String,
       default: "",
     },
+
+    resetPasswordToken: {
+      type: String,
+      default: "",
+    },
+
+    resetPasswordExpires: {
+      type: Date,
+    },
   },
   {
     timestamps: true,
-  }
+  },
 );
 
 export default mongoose.model("User", userSchema);

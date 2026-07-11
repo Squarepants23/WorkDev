@@ -4,6 +4,8 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import fs from "fs";
 import path from "path";
+import crypto from "crypto";
+import transporter from "../config/mailer";
 
 import User from "../models/User";
 
@@ -96,6 +98,96 @@ export async function login(req: Request, res: Response) {
   }
 }
 
+export async function forgotPassword(req: Request, res: Response) {
+  try {
+    const { email } = req.body;
+
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return res.status(404).json({
+        message: "Email tidak ditemukan.",
+      });
+    }
+
+    const resetToken = crypto.randomBytes(32).toString("hex");
+
+    user.resetPasswordToken = resetToken;
+    user.resetPasswordExpires = new Date(Date.now() + 1000 * 60 * 15);
+
+    await user.save();
+
+    const resetLink = `http://localhost:5173/reset-password/${resetToken}`;
+
+    await transporter.sendMail({
+      from: process.env.EMAIL_USER,
+      to: user.email,
+      subject: "Reset Password WorkDev",
+      html: `
+        <h2>Reset Password WorkDev</h2>
+
+        <p>Halo ${user.fullName},</p>
+
+        <p>Klik tombol berikut untuk membuat password baru.</p>
+
+        <a href="${resetLink}">
+          Reset Password
+        </a>
+
+        <p>Link berlaku selama 15 menit.</p>
+      `,
+    });
+
+    return res.json({
+      message: "Email reset password berhasil dikirim.",
+    });
+  } catch (error) {
+    console.error(error);
+
+    return res.status(500).json({
+      message: "Terjadi kesalahan server.",
+    });
+  }
+}
+
+export async function resetPassword(req: Request, res: Response) {
+  try {
+    const { token } = req.params;
+
+    const { password } = req.body;
+
+    const user = await User.findOne({
+      resetPasswordToken: token,
+      resetPasswordExpires: {
+        $gt: new Date(),
+      },
+    });
+
+    if (!user) {
+      return res.status(400).json({
+        message: "Token sudah tidak berlaku.",
+      });
+    }
+
+    user.password = await bcrypt.hash(password, 10);
+
+    user.resetPasswordToken = "";
+    user.resetPasswordExpires = undefined;
+
+    await user.save();
+
+    return res.json({
+      message: "Password berhasil diubah.",
+    });
+  } catch (error) {
+    console.error(error);
+
+    return res.status(500).json({
+      message: "Terjadi kesalahan server.",
+    });
+  }
+}
+
 export async function me(req: AuthRequest, res: Response) {
   try {
     console.log("User ID dari token:", req.user?.id);
@@ -125,6 +217,7 @@ export async function updateProfile(req: AuthRequest, res: Response) {
       username,
       bio,
       location,
+      developerRole,
       github,
       linkedin,
       linktree,
@@ -138,6 +231,7 @@ export async function updateProfile(req: AuthRequest, res: Response) {
         username,
         bio,
         location,
+        developerRole,
         github,
         linkedin,
         linktree,

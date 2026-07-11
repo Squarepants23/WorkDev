@@ -9,6 +9,7 @@ interface Member {
   username: string;
   bio?: string;
   location?: string;
+  developerRole: string;
   role: string;
   avatar?: string;
 }
@@ -21,7 +22,11 @@ function MembersPage() {
   useEffect(() => {
     async function fetchMembers() {
       try {
-        const response = await api.get("/users");
+        const response = await api.get("/users", {
+          params: {
+            search,
+          },
+        });
         setMembers(response.data);
       } catch (error) {
         console.error(error);
@@ -29,16 +34,13 @@ function MembersPage() {
     }
 
     fetchMembers();
-  }, []);
+  }, [search]);
 
   const filteredMembers = members.filter((member) => {
-    const matchSearch = member.fullName
-      .toLowerCase()
-      .includes(search.toLowerCase());
+    const matchRole =
+      roleFilter === "All" || member.developerRole === roleFilter;
 
-    const matchRole = roleFilter === "All" || member.role === roleFilter;
-
-    return matchSearch && matchRole;
+    return matchRole;
   });
 
   return (
@@ -71,7 +73,12 @@ function MembersPage() {
             <option value="All">All</option>
             <option value="Frontend">Frontend</option>
             <option value="Backend">Backend</option>
+            <option value="Fullstack">Fullstack</option>
             <option value="UI/UX">UI/UX</option>
+            <option value="Mobile">Mobile</option>
+            <option value="DevOps">DevOps</option>
+            <option value="AI">AI</option>
+            <option value="Game Developer">Game Developer</option>
           </select>
         </div>
 
@@ -82,7 +89,7 @@ function MembersPage() {
               id={member._id}
               name={member.fullName}
               username={member.username}
-              role={member.role}
+              role={member.developerRole}
               bio={member.bio}
               location={member.location}
               avatar={member.avatar}

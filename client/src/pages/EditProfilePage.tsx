@@ -9,6 +9,7 @@ function EditProfilePage() {
   const [username, setUsername] = useState("");
   const [bio, setBio] = useState("");
   const [location, setLocation] = useState("");
+  const [developerRole, setDeveloperRole] = useState("Fullstack");
   const [github, setGithub] = useState("");
   const [linkedin, setLinkedin] = useState("");
   const [linktree, setLinktree] = useState("");
@@ -26,6 +27,7 @@ function EditProfilePage() {
       setUsername(user.username);
       setBio(user.bio || "");
       setLocation(user.location || "");
+      setDeveloperRole(user.developerRole || "Fullstack");
       setGithub(user.github || "");
       setLinkedin(user.linkedin || "");
       setLinktree(user.linktree || "");
@@ -43,6 +45,7 @@ function EditProfilePage() {
         username,
         bio,
         location,
+        developerRole,
         github,
         linkedin,
         linktree,
@@ -153,6 +156,25 @@ function EditProfilePage() {
               onChange={(e) => setLocation(e.target.value)}
               className="w-full rounded-lg border p-3"
             />
+          </div>
+
+          <div>
+            <label className="mb-2 block font-medium">Developer Role</label>
+
+            <select
+              value={developerRole}
+              onChange={(e) => setDeveloperRole(e.target.value)}
+              className="w-full rounded-lg border p-3"
+            >
+              <option value="Frontend">Frontend</option>
+              <option value="Backend">Backend</option>
+              <option value="Fullstack">Fullstack</option>
+              <option value="UI/UX">UI/UX</option>
+              <option value="Mobile">Mobile</option>
+              <option value="DevOps">DevOps</option>
+              <option value="AI">AI</option>
+              <option value="Game Developer">Game Developer</option>
+            </select>
           </div>
 
           <div>

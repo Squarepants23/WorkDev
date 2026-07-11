@@ -1,16 +1,16 @@
 import type { Request, Response } from "express";
 import User from "../models/User";
+import Project from "../models/Project";
 
-export async function getDashboardStats(
-  req: Request,
-  res: Response
-) {
+export async function getDashboardStats(req: Request, res: Response) {
   try {
     const totalMembers = await User.countDocuments();
 
+    const totalProjects = await Project.countDocuments();
+
     res.json({
       totalMembers,
-      totalProjects: 0,
+      totalProjects,
       activeDevelopers: totalMembers,
     });
   } catch (error) {

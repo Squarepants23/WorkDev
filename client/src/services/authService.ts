@@ -16,6 +16,55 @@ export async function login(data: { email: string; password: string }) {
   return response.data;
 }
 
+export async function forgotPassword(email: string) {
+  const response = await fetch(
+    "http://localhost:5000/api/auth/forgot-password",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email,
+      }),
+    },
+  );
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.message);
+  }
+
+  return data;
+}
+
+export async function resetPassword(
+  token: string,
+  password: string,
+) {
+  const response = await fetch(
+    `http://localhost:5000/api/auth/reset-password/${token}`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        password,
+      }),
+    },
+  );
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.message);
+  }
+
+  return data;
+}
+
 export async function getMe() {
   const token = localStorage.getItem("token");
 
@@ -33,6 +82,7 @@ export async function updateProfile(data: {
   username: string;
   bio: string;
   location: string;
+  developerRole: string;
   github: string;
   linkedin: string;
   linktree: string;

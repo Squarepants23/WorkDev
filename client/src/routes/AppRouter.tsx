@@ -7,8 +7,12 @@ import MemberDetailPage from "../pages/MemberDetailPage";
 import ProjectsPage from "../pages/ProjectsPage";
 import EditProjectPage from "../pages/EditProjectPage";
 import AboutPage from "../pages/AboutPage";
+import JoinCommunityPage from "../pages/JoinCommunityPage";
 import LoginPage from "../pages/LoginPage";
+import ForgotPasswordPage from "../pages/ForgotPasswordPage";
+import ResetPasswordPage from "../pages/ResetPasswordPage";
 import RegisterPage from "../pages/RegisterPage";
+import OAuthSuccessPage from "../pages/OAuthSuccessPage";
 import DashboardPage from "../pages/DashboardPage";
 import MyProfilePage from "../pages/MyProfilePage";
 import EditProfilePage from "../pages/EditProfilePage";
@@ -25,8 +29,12 @@ function AppRouter() {
       <Route path="/projects/:id" element={<ProjectDetailPage />} />
       <Route path="/projects/:id/edit" element={<EditProjectPage />} />
       <Route path="/about" element={<AboutPage />} />
+      <Route path="/join-community" element={<JoinCommunityPage />} />
       <Route path="/login" element={<LoginPage />} />
+      <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+      <Route path="/reset-password/:token" element={<ResetPasswordPage />} />
       <Route path="/register" element={<RegisterPage />} />
+      <Route path="/oauth-success" element={<OAuthSuccessPage />} />
       <Route
         path="/dashboard"
         element={

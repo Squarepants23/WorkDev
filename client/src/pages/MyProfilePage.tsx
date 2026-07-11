@@ -7,6 +7,7 @@ interface User {
   fullName: string;
   username: string;
   email: string;
+  developerRole?: string;
   bio?: string;
   location?: string;
   github?: string;
@@ -80,6 +81,13 @@ function MyProfilePage() {
           <div>
             <p className="font-semibold">Lokasi</p>
             <p className="text-gray-600">{user.location || "Belum diisi"}</p>
+          </div>
+
+          <div>
+            <p className="font-semibold">Developer Role</p>
+            <p className="text-gray-600">
+              {user.developerRole || "Belum dipilih"}
+            </p>
           </div>
 
           <div className="space-y-3">

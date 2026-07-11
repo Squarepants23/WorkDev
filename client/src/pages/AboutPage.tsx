@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 import Container from "../components/Container/Container";
 import Button from "../components/Button/Button";
 
@@ -43,8 +45,10 @@ function AboutPage() {
         </div>
 
         <div className="mt-12 flex justify-center">
-          <Button>Join Community</Button>
-        </div>
+  <Link to="/join-community">
+    <Button>Join Community</Button>
+  </Link>
+</div>
       </section>
     </Container>
   );
