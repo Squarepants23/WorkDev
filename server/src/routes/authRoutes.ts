@@ -9,6 +9,8 @@ import {
   me,
   updateProfile,
   uploadAvatar,
+  setOffline,
+  ping,
 } from "../controllers/authController";
 import { verifyToken } from "../middleware/authMiddleware";
 import upload from "../middleware/uploadMiddleware";
@@ -17,14 +19,8 @@ const router = Router();
 
 router.post("/register", register);
 router.post("/login", login);
-router.post(
-  "/forgot-password",
-  forgotPassword
-);
-router.post(
-  "/reset-password/:token",
-  resetPassword
-);
+router.post("/forgot-password", forgotPassword);
+router.post("/reset-password/:token", resetPassword);
 
 router.get(
   "/google",
@@ -67,6 +63,10 @@ router.get(
 );
 
 router.get("/me", verifyToken, me);
+
+router.post("/offline", verifyToken, setOffline);
+
+router.post("/ping", verifyToken, ping);
 
 router.put("/me", verifyToken, updateProfile);
 

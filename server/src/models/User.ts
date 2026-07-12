@@ -44,6 +44,16 @@ const userSchema = new mongoose.Schema(
       default: "user",
     },
 
+    isOnline: {
+  type: Boolean,
+  default: false,
+},
+
+lastActive: {
+  type: Date,
+  default: Date.now,
+},
+
     developerRole: {
       type: String,
       default: "Fullstack",

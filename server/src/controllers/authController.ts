@@ -73,6 +73,11 @@ export async function login(req: Request, res: Response) {
 
     console.log("User login _id:", user._id);
 
+    user.isOnline = true;
+    user.lastActive = new Date();
+
+    await user.save();
+
     const token = jwt.sign(
       {
         id: user._id,
@@ -301,5 +306,55 @@ export async function uploadAvatar(req: AuthRequest, res: Response) {
     res.status(500).json({
       message: "Terjadi kesalahan pada server.",
     });
+  }
+}
+
+export async function setOffline(req: AuthRequest, res: Response) {
+  try {
+    const user = await User.findById(req.user?.id);
+
+    if (!user) {
+      return res.status(404).json({
+        message: "User tidak ditemukan.",
+      });
+    }
+
+    user.isOnline = false;
+    user.lastActive = new Date();
+
+    await user.save();
+
+    return res.json({
+      message: "Status offline berhasil diperbarui.",
+    });
+  } catch (error) {
+    console.error(error);
+
+    return res.status(500).json({
+      message: "Terjadi kesalahan server.",
+    });
+  }
+}
+
+export async function ping(req: AuthRequest, res: Response) {
+  try {
+    const user = await User.findById(req.user?.id);
+
+    if (!user) {
+      return res.status(404).json({
+        message: "User tidak ditemukan.",
+      });
+    }
+
+    user.isOnline = true;
+    user.lastActive = new Date();
+
+    await user.save();
+
+    return res.sendStatus(200);
+  } catch (error) {
+    console.error(error);
+
+    return res.sendStatus(500);
   }
 }

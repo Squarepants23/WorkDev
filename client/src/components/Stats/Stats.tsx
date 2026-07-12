@@ -5,7 +5,7 @@ function Stats() {
   const [stats, setStats] = useState({
     totalMembers: 0,
     totalProjects: 0,
-    activeDevelopers: 0,
+    onlineNow: 0,
   });
 
   useEffect(() => {
@@ -40,7 +40,7 @@ function Stats() {
 
         <div className="rounded-xl border bg-white p-8 text-center shadow-sm">
           <h2 className="text-4xl font-bold text-blue-600">
-            {stats.activeDevelopers}
+            {stats.onlineNow}
           </h2>
           <p className="mt-2 text-gray-600">Active Developers</p>
         </div>

@@ -5,7 +5,6 @@ import Stats from "../components/Stats/Stats";
 import FeatureSection from "../components/FeatureSection/FeatureSection";
 import MemberPreview from "../components/MemberPreview/MemberPreview";
 import TechnologyStack from "../components/TechnologyStack/TechnologyStack";
-import ProjectPreview from "../components/ProjectPreview/ProjectPreview";
 
 function HomePage() {
   return (
@@ -44,7 +43,6 @@ function HomePage() {
 
       <TechnologyStack />
 
-      <ProjectPreview />
     </Container>
   );
 }

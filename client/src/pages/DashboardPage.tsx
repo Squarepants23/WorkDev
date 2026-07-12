@@ -33,7 +33,7 @@ function DashboardPage() {
 
   return (
     <div className="p-8">
-      <h1 className="mb-6 text-3xl font-bold">Dashboard</h1>
+      <h1 className="mb-6 text-3xl font-bold">Member Dashboard</h1>
 
       <div className="space-y-3 rounded-xl border p-6">
         <h2 className="text-2xl font-semibold">Halo, {user.fullName}</h2>
@@ -56,6 +56,13 @@ function DashboardPage() {
             className="rounded-lg bg-blue-600 px-5 py-2 font-semibold text-white transition hover:bg-blue-700"
           >
             My Profile
+          </button>
+
+          <button
+            onClick={() => navigate("/dashboard/projects")}
+            className="rounded-lg bg-emerald-600 px-5 py-2 font-semibold text-white transition hover:bg-emerald-700"
+          >
+            My Projects
           </button>
         </div>
       </div>

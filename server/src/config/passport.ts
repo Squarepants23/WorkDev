@@ -36,6 +36,11 @@ passport.use(
           await user.save();
         }
 
+        user.isOnline = true;
+        user.lastActive = new Date();
+
+        await user.save();
+
         const token = jwt.sign(
           {
             id: user._id,
@@ -70,19 +75,14 @@ passport.use(
         const email = profile.emails?.[0]?.value;
 
         let user = await User.findOne({
-          $or: [
-            { githubId: profile.id },
-            { email }
-          ],
+          $or: [{ githubId: profile.id }, { email }],
         });
 
         if (!user) {
           user = await User.create({
             githubId: profile.id,
             fullName: profile.displayName || profile.username,
-            username:
-              profile.username +
-              Math.floor(Math.random() * 10000),
+            username: profile.username + Math.floor(Math.random() * 10000),
             email: email || `${profile.username}@github.local`,
             avatar: profile.photos?.[0]?.value || "",
           });
@@ -90,6 +90,11 @@ passport.use(
           user.githubId = profile.id;
           await user.save();
         }
+
+        user.isOnline = true;
+        user.lastActive = new Date();
+
+        await user.save();
 
         const token = jwt.sign(
           {
@@ -99,15 +104,15 @@ passport.use(
           process.env.JWT_SECRET!,
           {
             expiresIn: "7d",
-          }
+          },
         );
 
         return done(null, { token });
       } catch (error) {
         return done(error as Error);
       }
-    }
-  )
+    },
+  ),
 );
 
 export default passport;

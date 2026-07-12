@@ -13,8 +13,10 @@ import ForgotPasswordPage from "../pages/ForgotPasswordPage";
 import ResetPasswordPage from "../pages/ResetPasswordPage";
 import RegisterPage from "../pages/RegisterPage";
 import OAuthSuccessPage from "../pages/OAuthSuccessPage";
+import AdminDashboardPage from "../pages/AdminDashboardPage";
 import DashboardPage from "../pages/DashboardPage";
 import MyProfilePage from "../pages/MyProfilePage";
+import MyProjectsPage from "../pages/MyProjectsPage";
 import EditProfilePage from "../pages/EditProfilePage";
 import NotFoundPage from "../pages/NotFoundPage";
 import ProjectDetailPage from "../pages/ProjectDetailPage";
@@ -43,7 +45,23 @@ function AppRouter() {
           </ProtectedRoute>
         }
       />
+      <Route
+        path="/admin/dashboard"
+        element={
+          <ProtectedRoute>
+            <AdminDashboardPage />
+          </ProtectedRoute>
+        }
+      />
       <Route path="/dashboard/profile" element={<MyProfilePage />} />
+      <Route
+        path="/dashboard/projects"
+        element={
+          <ProtectedRoute>
+            <MyProjectsPage />
+          </ProtectedRoute>
+        }
+      />
       <Route path="/dashboard/profile/edit" element={<EditProfilePage />} />
       <Route path="*" element={<NotFoundPage />} />
     </Routes>

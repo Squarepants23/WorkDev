@@ -7,6 +7,7 @@ import passport from "./config/passport";
 
 import authRoutes from "./routes/authRoutes";
 import dashboardRoutes from "./routes/dashboardRoutes";
+import activityRoutes from "./routes/activityRoutes";
 import postRoutes from "./routes/postRoutes";
 import projectRoutes from "./routes/projectRoutes";
 import userRoutes from "./routes/userRoutes";
@@ -34,6 +35,7 @@ app.use(
 
 app.use("/api/auth", authRoutes);
 app.use("/api/dashboard", dashboardRoutes);
+app.use("/api/activity", activityRoutes);
 app.use("/api/posts", postRoutes);
 app.use("/api/projects", projectRoutes);
 app.use("/api/users", userRoutes);

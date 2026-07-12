@@ -8,10 +8,12 @@ export async function getDashboardStats(req: Request, res: Response) {
 
     const totalProjects = await Project.countDocuments();
 
+    const onlineNow = await User.countDocuments({ isOnline: true });
+
     res.json({
       totalMembers,
       totalProjects,
-      activeDevelopers: totalMembers,
+      onlineNow,
     });
   } catch (error) {
     console.error(error);

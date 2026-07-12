@@ -8,6 +8,7 @@ import { getMe } from "../../services/authService";
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [avatar, setAvatar] = useState("");
+  const [role, setRole] = useState("");
 
   const navigate = useNavigate();
 
@@ -24,6 +25,8 @@ function Navbar() {
         if (user.avatar) {
           setAvatar(`http://localhost:5000${user.avatar}`);
         }
+
+        setRole(user.role);
       } catch (error) {
         console.error(error);
       }
@@ -125,6 +128,12 @@ function Navbar() {
                 <Button>Dashboard</Button>
               </Link>
 
+              {role === "admin" && (
+                <Link to="/admin/dashboard">
+                  <Button>Admin</Button>
+                </Link>
+              )}
+
               <Button onClick={handleLogout}>Logout</Button>
             </>
           ) : (
@@ -179,6 +188,12 @@ function Navbar() {
                 <Link to="/dashboard">
                   <Button>Dashboard</Button>
                 </Link>
+
+                {role === "admin" && (
+                  <Link to="/admin/dashboard">
+                    <Button>Admin</Button>
+                  </Link>
+                )}
 
                 <Button onClick={handleLogout}>Logout</Button>
               </>
