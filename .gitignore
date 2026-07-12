@@ -29,3 +29,6 @@ Thumbs.db
 
 # Uploads
 server/uploads
+
+#PWA Development
+client/dev-dist/

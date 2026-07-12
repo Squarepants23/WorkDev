@@ -21,6 +21,27 @@ export async function getAllProjects(
   }
 }
 
+export async function getMyProjects(
+  req: AuthRequest,
+  res: Response
+) {
+  try {
+    const projects = await Project.find({
+      owner: req.user?.id,
+    })
+      .populate("owner", "fullName username avatar")
+      .sort({ createdAt: -1 });
+
+    return res.json(projects);
+  } catch (error) {
+    console.error(error);
+
+    return res.status(500).json({
+      message: "Terjadi kesalahan server.",
+    });
+  }
+}
+
 export async function getProjectById(
   req: Request,
   res: Response

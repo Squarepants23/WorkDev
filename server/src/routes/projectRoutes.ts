@@ -3,6 +3,7 @@ import { Router } from "express";
 import {
   createProject,
   getAllProjects,
+  getMyProjects,
   getProjectById,
   updateProject,
   deleteProject,
@@ -23,6 +24,7 @@ import uploadProject from "../middleware/uploadProject";
 const router = Router();
 
 router.get("/", getAllProjects);
+router.get("/my", verifyToken, getMyProjects);
 router.get("/:id", getProjectById);
 
 router.post("/", verifyToken, uploadProject.single("thumbnail"), createProject);

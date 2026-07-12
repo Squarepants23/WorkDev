@@ -17,6 +17,7 @@ import AdminDashboardPage from "../pages/AdminDashboardPage";
 import DashboardPage from "../pages/DashboardPage";
 import MyProfilePage from "../pages/MyProfilePage";
 import MyProjectsPage from "../pages/MyProjectsPage";
+import CreateProjectPage from "../pages/CreateProjectPage";
 import EditProfilePage from "../pages/EditProfilePage";
 import NotFoundPage from "../pages/NotFoundPage";
 import ProjectDetailPage from "../pages/ProjectDetailPage";
@@ -59,6 +60,14 @@ function AppRouter() {
         element={
           <ProtectedRoute>
             <MyProjectsPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/dashboard/projects/create"
+        element={
+          <ProtectedRoute>
+            <CreateProjectPage />
           </ProtectedRoute>
         }
       />
