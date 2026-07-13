@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import { HiMenu, HiX } from "react-icons/hi";
+import { HiMenu, HiX, HiCog } from "react-icons/hi";
 import Logo from "../Logo/Logo";
 import Button from "../Button/Button";
 import { getMe } from "../../services/authService";
@@ -50,8 +50,8 @@ function Navbar() {
   }
 
   return (
-    <nav className="border-b border-gray-200 bg-white">
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
+    <nav className="sticky top-0 z-50 border-b border-slate-200/60 bg-white/80 backdrop-blur-xl shadow-sm">
+      <div className="mx-auto flex h-18 max-w-7xl items-center justify-between px-6 lg:px-8">
         <Logo />
 
         <button
@@ -124,6 +124,15 @@ function Navbar() {
                 )}
               </Link>
 
+              <Link to="/settings">
+                <button
+                  className="flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-700 shadow-sm transition hover:scale-105 hover:bg-blue-50 hover:text-blue-600"
+                  title="Settings"
+                >
+                  <HiCog className="text-xl" />
+                </button>
+              </Link>
+
               <Link to="/dashboard">
                 <Button>Dashboard</Button>
               </Link>
@@ -183,6 +192,10 @@ function Navbar() {
                       U
                     </div>
                   )}
+                </Link>
+
+                <Link to="/settings" onClick={() => setIsOpen(false)}>
+                  <Button>⚙️ Settings</Button>
                 </Link>
 
                 <Link to="/dashboard">

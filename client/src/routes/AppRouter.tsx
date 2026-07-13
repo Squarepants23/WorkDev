@@ -15,6 +15,7 @@ import RegisterPage from "../pages/RegisterPage";
 import OAuthSuccessPage from "../pages/OAuthSuccessPage";
 import AdminDashboardPage from "../pages/AdminDashboardPage";
 import DashboardPage from "../pages/DashboardPage";
+import SettingsPage from "../pages/SettingsPage";
 import MyProfilePage from "../pages/MyProfilePage";
 import MyProjectsPage from "../pages/MyProjectsPage";
 import CreateProjectPage from "../pages/CreateProjectPage";
@@ -51,6 +52,14 @@ function AppRouter() {
         element={
           <ProtectedRoute>
             <AdminDashboardPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/settings"
+        element={
+          <ProtectedRoute>
+            <SettingsPage />
           </ProtectedRoute>
         }
       />
