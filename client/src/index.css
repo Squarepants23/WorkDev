@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @keyframes marquee-left {
   from {
     transform: translateX(0);
@@ -33,4 +35,13 @@
 
 .marquee:hover {
   animation-play-state: paused;
+}
+
+html.dark {
+  color-scheme: dark;
+}
+
+html.dark body {
+  background: #020617;
+  color: white;
 }

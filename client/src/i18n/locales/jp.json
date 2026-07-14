@@ -1,0 +1,25 @@
+{
+  "navbar": {
+    "home": "ホーム",
+    "members": "メンバー",
+    "projects": "プロジェクト",
+    "about": "概要",
+    "login": "ログイン",
+    "register": "登録",
+    "dashboard": "ダッシュボード",
+    "settings": "設定",
+    "logout": "ログアウト"
+  },
+
+  "home": {
+    "welcome": "コーディングコミュニティへようこそ",
+    "title": "WorkDev",
+    "description": "学び、協力し、一緒にプロジェクトを作るためのコーディングコミュニティです。"
+  },
+
+  "settings": {
+    "title": "設定",
+    "language": "言語",
+    "theme": "テーマ"
+  }
+}

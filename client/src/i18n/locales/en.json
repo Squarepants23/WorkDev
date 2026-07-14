@@ -1,0 +1,25 @@
+{
+  "navbar": {
+    "home": "Home",
+    "members": "Members",
+    "projects": "Projects",
+    "about": "About",
+    "login": "Login",
+    "register": "Register",
+    "dashboard": "Dashboard",
+    "settings": "Settings",
+    "logout": "Logout"
+  },
+
+  "home": {
+    "welcome": "Welcome to Coding Community",
+    "title": "WorkDev",
+    "description": "A coding community to learn, collaborate, and build projects together."
+  },
+
+  "settings": {
+    "title": "Settings",
+    "language": "Language",
+    "theme": "Theme"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "navbar": {
+    "home": "Главная",
+    "members": "Участники",
+    "projects": "Проекты",
+    "about": "О нас",
+    "login": "Войти",
+    "register": "Регистрация",
+    "dashboard": "Панель",
+    "settings": "Настройки",
+    "logout": "Выйти"
+  },
+
+  "home": {
+    "welcome": "Добро пожаловать в Coding Community",
+    "title": "WorkDev",
+    "description": "Сообщество программистов для обучения, сотрудничества и создания проектов."
+  },
+
+  "settings": {
+    "title": "Настройки",
+    "language": "Язык",
+    "theme": "Тема"
+  }
+}

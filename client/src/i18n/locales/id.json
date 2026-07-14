@@ -1,0 +1,25 @@
+{
+  "navbar": {
+    "home": "Beranda",
+    "members": "Anggota",
+    "projects": "Proyek",
+    "about": "Tentang",
+    "login": "Masuk",
+    "register": "Daftar",
+    "dashboard": "Dashboard",
+    "settings": "Pengaturan",
+    "logout": "Keluar"
+  },
+
+  "home": {
+    "welcome": "Selamat Datang di Coding Community",
+    "title": "WorkDev",
+    "description": "Komunitas coding untuk belajar, berkolaborasi, dan membangun proyek bersama."
+  },
+
+  "settings": {
+    "title": "Pengaturan",
+    "language": "Bahasa",
+    "theme": "Tema"
+  }
+}

@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { HiMenu, HiX, HiCog } from "react-icons/hi";
+import { useTranslation } from "react-i18next";
 import Logo from "../Logo/Logo";
 import Button from "../Button/Button";
 import { getMe } from "../../services/authService";
 
 function Navbar() {
+  const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const [avatar, setAvatar] = useState("");
   const [role, setRole] = useState("");
@@ -50,7 +52,27 @@ function Navbar() {
   }
 
   return (
-    <nav className="sticky top-0 z-50 border-b border-slate-200/60 bg-white/80 backdrop-blur-xl shadow-sm">
+    <nav
+      className="
+sticky
+top-0
+z-50
+
+border-b
+border-slate-200/60
+
+bg-white/80
+
+dark:bg-slate-900/80
+dark:border-slate-700
+
+backdrop-blur-xl
+shadow-sm
+
+transition-colors
+duration-300
+"
+    >
       <div className="mx-auto flex h-18 max-w-7xl items-center justify-between px-6 lg:px-8">
         <Logo />
 
@@ -70,7 +92,7 @@ function Navbar() {
                 : "transition hover:text-blue-600"
             }
           >
-            Home
+            {t("navbar.home")}
           </NavLink>
 
           <NavLink
@@ -81,7 +103,7 @@ function Navbar() {
                 : "transition hover:text-blue-600"
             }
           >
-            Members
+            {t("navbar.members")}
           </NavLink>
 
           <NavLink
@@ -92,7 +114,7 @@ function Navbar() {
                 : "transition hover:text-blue-600"
             }
           >
-            Projects
+            {t("navbar.projects")}
           </NavLink>
 
           <NavLink
@@ -103,7 +125,7 @@ function Navbar() {
                 : "transition hover:text-blue-600"
             }
           >
-            About
+            {t("navbar.about")}
           </NavLink>
         </div>
 
@@ -134,7 +156,7 @@ function Navbar() {
               </Link>
 
               <Link to="/dashboard">
-                <Button>Dashboard</Button>
+                <Button>{t("navbar.dashboard")}</Button>
               </Link>
 
               {role === "admin" && (
@@ -143,16 +165,16 @@ function Navbar() {
                 </Link>
               )}
 
-              <Button onClick={handleLogout}>Logout</Button>
+              <Button onClick={handleLogout}>{t("navbar.logout")}</Button>
             </>
           ) : (
             <>
               <Link to="/login">
-                <Button>Login</Button>
+                <Button>{t("navbar.login")}</Button>
               </Link>
 
               <Link to="/register">
-                <Button>Register</Button>
+                <Button>{t("navbar.register")}</Button>
               </Link>
             </>
           )}
@@ -163,19 +185,19 @@ function Navbar() {
         <div className="border-t border-gray-200 bg-white md:hidden">
           <div className="flex flex-col space-y-4 px-6 py-4">
             <Link to="/" onClick={() => setIsOpen(false)}>
-              Home
+              {t("navbar.home")}
             </Link>
 
             <Link to="/members" onClick={() => setIsOpen(false)}>
-              Members
+              {t("navbar.members")}
             </Link>
 
             <Link to="/projects" onClick={() => setIsOpen(false)}>
-              Projects
+              {t("navbar.projects")}
             </Link>
 
             <Link to="/about" onClick={() => setIsOpen(false)}>
-              About
+              {t("navbar.about")}
             </Link>
 
             {isLoggedIn ? (
@@ -195,11 +217,11 @@ function Navbar() {
                 </Link>
 
                 <Link to="/settings" onClick={() => setIsOpen(false)}>
-                  <Button>⚙️ Settings</Button>
+                  <Button>⚙️ {t("navbar.settings")}</Button>
                 </Link>
 
                 <Link to="/dashboard">
-                  <Button>Dashboard</Button>
+                  <Button>{t("navbar.dashboard")}</Button>
                 </Link>
 
                 {role === "admin" && (
@@ -208,16 +230,16 @@ function Navbar() {
                   </Link>
                 )}
 
-                <Button onClick={handleLogout}>Logout</Button>
+                <Button onClick={handleLogout}>{t("navbar.logout")}</Button>
               </>
             ) : (
               <>
                 <Link to="/login" onClick={() => setIsOpen(false)}>
-                  <Button>Login</Button>
+                  <Button>{t("navbar.login")}</Button>
                 </Link>
 
                 <Link to="/register" onClick={() => setIsOpen(false)}>
-                  <Button>Register</Button>
+                  <Button>{t("navbar.register")}</Button>
                 </Link>
               </>
             )}
