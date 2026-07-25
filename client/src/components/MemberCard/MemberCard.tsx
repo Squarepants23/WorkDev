@@ -30,7 +30,7 @@ function MemberCard({
         <img
           src={
             avatar
-              ? `http://localhost:5000${avatar}`
+              ? `${avatar}`
               : `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}`
           }
           alt={name}

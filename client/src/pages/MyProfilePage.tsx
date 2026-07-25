@@ -52,7 +52,7 @@ function MyProfilePage() {
         <div className="flex flex-col items-center">
           {user.avatar ? (
             <img
-              src={`http://localhost:5000${user.avatar}`}
+              src={`${user.avatar}`}
               alt="Avatar"
               className="mb-4 h-28 w-28 rounded-full border-4 border-blue-500 object-cover"
             />

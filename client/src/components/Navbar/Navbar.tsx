@@ -25,7 +25,7 @@ function Navbar() {
         const user = await getMe();
 
         if (user.avatar) {
-          setAvatar(`http://localhost:5000${user.avatar}`);
+          setAvatar(`${user.avatar}`);
         }
 
         setRole(user.role);

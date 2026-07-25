@@ -42,17 +42,17 @@ function AdminDashboardPage() {
     const fetchDashboardStats = async () => {
       try {
         const res = await axios.get(
-          "http://localhost:5000/api/dashboard/stats",
+          "/api/dashboard/stats",
         );
 
         setStats(res.data);
 
-        const userRes = await axios.get("http://localhost:5000/api/users");
+        const userRes = await axios.get("/api/users");
 
         setUsers(userRes.data);
 
         const activityRes = await axios.get(
-          "http://localhost:5000/api/activity",
+          "/api/activity",
         );
 
         setActivities(activityRes.data);
@@ -114,7 +114,7 @@ function AdminDashboardPage() {
                   <img
                     src={
                       activity.avatar
-                        ? `http://localhost:5000${activity.avatar}`
+                        ? `${activity.avatar}`
                         : `https://ui-avatars.com/api/?name=${encodeURIComponent(
                             activity.fullName,
                           )}`
@@ -180,7 +180,7 @@ function AdminDashboardPage() {
                       <img
                         src={
                           user.avatar
-                            ? `http://localhost:5000${user.avatar}`
+                            ? `${user.avatar}`
                             : "https://ui-avatars.com/api/?name=" +
                               encodeURIComponent(user.fullName)
                         }

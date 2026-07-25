@@ -50,7 +50,7 @@ function MemberDetailPage() {
           <img
             src={
               member.avatar
-                ? `http://localhost:5000${member.avatar}`
+                ? `${member.avatar}`
                 : "https://ui-avatars.com/api/?name=" +
                   encodeURIComponent(member.fullName)
             }

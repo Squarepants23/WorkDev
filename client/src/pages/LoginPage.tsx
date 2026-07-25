@@ -125,7 +125,7 @@ function LoginPage() {
             <button
               type="button"
               onClick={() => {
-                window.location.href = "http://localhost:5000/api/auth/google";
+                window.location.href = "/api/auth/google";
               }}
               className="flex w-full items-center justify-center gap-3 rounded-lg border border-gray-300 py-3 font-medium transition hover:bg-gray-100"
             >
@@ -136,7 +136,7 @@ function LoginPage() {
             <button
               type="button"
               onClick={() => {
-                window.location.href = "http://localhost:5000/api/auth/github";
+                window.location.href = "/api/auth/github";
               }}
               className="flex w-full items-center justify-center gap-3 rounded-lg border border-gray-300 py-3 font-medium transition hover:bg-gray-100"
             >

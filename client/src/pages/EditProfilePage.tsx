@@ -32,7 +32,7 @@ function EditProfilePage() {
       setLinkedin(user.linkedin || "");
       setLinktree(user.linktree || "");
       setPortfolio(user.portfolio || "");
-      setPreview(user.avatar ? `http://localhost:5000${user.avatar}` : "");
+      setPreview(user.avatar ? `${user.avatar}` : "");
     }
 
     fetchUser();

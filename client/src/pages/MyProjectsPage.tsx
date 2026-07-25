@@ -70,7 +70,7 @@ function MyProjectPage() {
                 <img
                   src={
                     project.thumbnail
-                      ? `http://localhost:5000${project.thumbnail}`
+                      ? `${project.thumbnail}`
                       : "https://placehold.co/600x300?text=No+Thumbnail"
                   }
                   alt={project.title}

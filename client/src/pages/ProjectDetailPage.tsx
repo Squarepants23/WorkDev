@@ -186,7 +186,7 @@ function ProjectDetailPage() {
             <img
               src={
                 project.thumbnail
-                  ? `http://localhost:5000${project.thumbnail}`
+                  ? `${project.thumbnail}`
                   : "https://placehold.co/1200x600?text=No+Thumbnail"
               }
               alt={project.title}
@@ -258,7 +258,7 @@ function ProjectDetailPage() {
                       <img
                         src={
                           item.user.avatar
-                            ? `http://localhost:5000${item.user.avatar}`
+                            ? `${item.user.avatar}`
                             : `https://ui-avatars.com/api/?name=${encodeURIComponent(item.user.fullName)}`
                         }
                         alt={item.user.fullName}
@@ -367,7 +367,7 @@ function ProjectDetailPage() {
                   <img
                     src={
                       project.owner?.avatar
-                        ? `http://localhost:5000${project.owner.avatar}`
+                        ? `${project.owner.avatar}`
                         : `https://ui-avatars.com/api/?name=${encodeURIComponent(
                             project.owner?.fullName || "User",
                           )}`

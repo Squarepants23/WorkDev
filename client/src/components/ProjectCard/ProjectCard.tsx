@@ -26,7 +26,7 @@ function ProjectCard({
       <div className="mb-4 overflow-hidden rounded-lg">
         {thumbnail ? (
           <img
-            src={`http://localhost:5000${thumbnail}`}
+            src={`${thumbnail}`}
             alt={title}
             className="h-40 w-full object-cover"
           />

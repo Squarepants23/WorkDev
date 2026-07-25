@@ -18,7 +18,7 @@ export async function login(data: { email: string; password: string }) {
 
 export async function forgotPassword(email: string) {
   const response = await fetch(
-    "http://localhost:5000/api/auth/forgot-password",
+    "/api/auth/forgot-password",
     {
       method: "POST",
       headers: {
@@ -44,7 +44,7 @@ export async function resetPassword(
   password: string,
 ) {
   const response = await fetch(
-    `http://localhost:5000/api/auth/reset-password/${token}`,
+    `/api/auth/reset-password/${token}`,
     {
       method: "POST",
       headers: {
@@ -107,7 +107,7 @@ export async function uploadAvatar(file: File) {
   formData.append("avatar", file);
 
   const response = await axios.post(
-    "http://localhost:5000/api/auth/avatar",
+    "/api/auth/avatar",
     formData,
     {
       headers: {

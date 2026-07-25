@@ -14,7 +14,7 @@ function OnlineStatus() {
     const ping = async () => {
       try {
         await axios.post(
-          "http://localhost:5000/api/auth/ping",
+          "/api/auth/ping",
           {},
           { headers }
         );
@@ -26,7 +26,7 @@ function OnlineStatus() {
     const setOffline = async () => {
       try {
         await axios.post(
-          "http://localhost:5000/api/auth/offline",
+          "/api/auth/offline",
           {},
           { headers }
         );

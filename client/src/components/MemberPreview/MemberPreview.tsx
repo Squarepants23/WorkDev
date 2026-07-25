@@ -73,7 +73,7 @@ function MemberPreview() {
                 <div className="flex justify-center">
                   {member.avatar ? (
                     <img
-                      src={`http://localhost:5000${member.avatar}`}
+                      src={`${member.avatar}`}
                       alt={member.fullName}
                       className="mb-4 h-24 w-24 rounded-full border-4 border-blue-500 object-cover"
                     />
