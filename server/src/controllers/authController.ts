@@ -122,7 +122,7 @@ export async function forgotPassword(req: Request, res: Response) {
 
     await user.save();
 
-    const resetLink = `http://localhost:5173/reset-password/${resetToken}`;
+    const resetLink = `https://workdev-v1.netlify.app/reset-password/${resetToken}`;
 
     await transporter.sendMail({
       from: process.env.EMAIL_USER,

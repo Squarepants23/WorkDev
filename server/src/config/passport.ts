@@ -12,7 +12,7 @@ passport.use(
     {
       clientID: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
-      callbackURL: "/api/auth/google/callback",
+      callbackURL: "https://workdev-v1.netlify.app/api/auth/google/callback",
     },
 
     async (
@@ -72,7 +72,7 @@ passport.use(
     {
       clientID: process.env.GITHUB_CLIENT_ID!,
       clientSecret: process.env.GITHUB_CLIENT_SECRET!,
-      callbackURL: "/api/auth/github/callback",
+      callbackURL: "https://workdev-v1.netlify.app/api/auth/github/callback",
     },
 
     async (

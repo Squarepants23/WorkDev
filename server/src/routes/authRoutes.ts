@@ -33,12 +33,12 @@ router.get(
   "/google/callback",
   passport.authenticate("google", {
     session: false,
-    failureRedirect: "http://localhost:5173/login",
+    failureRedirect: "/login",
   }),
   (req, res) => {
     const { token } = req.user as unknown as { token: string };
 
-    res.redirect(`http://localhost:5173/oauth-success?token=${token}`);
+    res.redirect(`/oauth-success?token=${token}`);
   },
 );
 
@@ -53,12 +53,12 @@ router.get(
   "/github/callback",
   passport.authenticate("github", {
     session: false,
-    failureRedirect: "http://localhost:5173/login",
+    failureRedirect: "/login",
   }),
   (req, res) => {
     const { token } = req.user as unknown as { token: string };
 
-    res.redirect(`http://localhost:5173/oauth-success?token=${token}`);
+    res.redirect(`/oauth-success?token=${token}`);
   },
 );
 
