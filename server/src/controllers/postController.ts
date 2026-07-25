@@ -1,7 +1,7 @@
 import type { Response } from "express";
-import type { AuthRequest } from "../middleware/authMiddleware";
+import type { AuthRequest } from "../middleware/authMiddleware.js";
 
-import Post from "../models/Post";
+import Post from "../models/Post.js";
 
 export async function createPost(req: AuthRequest, res: Response) {
   try {

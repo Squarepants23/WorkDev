@@ -1,7 +1,7 @@
 import dotenv from "dotenv";
 dotenv.config();
 import jwt from "jsonwebtoken";
-import User from "../models/User";
+import User from "../models/User.js";
 
 import passport from "passport";
 import { Strategy as GoogleStrategy } from "passport-google-oauth20";
@@ -15,7 +15,12 @@ passport.use(
       callbackURL: "/api/auth/google/callback",
     },
 
-    async (_accessToken, _refreshToken, profile, done) => {
+    async (
+      _accessToken: string,
+      _refreshToken: string,
+      profile: any,
+      done: (err: any, user?: any) => void,
+    ) => {
       try {
         let user = await User.findOne({
           $or: [{ googleId: profile.id }, { email: profile.emails?.[0].value }],
@@ -70,7 +75,12 @@ passport.use(
       callbackURL: "/api/auth/github/callback",
     },
 
-    async (_accessToken, _refreshToken, profile, done) => {
+    async (
+      _accessToken: string,
+      _refreshToken: string,
+      profile: any,
+      done: (err: any, user?: any) => void,
+    ) => {
       try {
         const email = profile.emails?.[0]?.value;
 

@@ -1,13 +1,13 @@
 import type { Request, Response } from "express";
-import type { AuthRequest } from "../middleware/authMiddleware";
+import type { AuthRequest } from "../middleware/authMiddleware.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import fs from "fs";
 import path from "path";
 import crypto from "crypto";
-import transporter from "../config/mailer";
+import transporter from "../config/mailer.js";
 
-import User from "../models/User";
+import User from "../models/User.js";
 
 export async function register(req: Request, res: Response) {
   try {

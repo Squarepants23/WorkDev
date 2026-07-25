@@ -11,9 +11,9 @@ import {
   uploadAvatar,
   setOffline,
   ping,
-} from "../controllers/authController";
-import { verifyToken } from "../middleware/authMiddleware";
-import upload from "../middleware/uploadMiddleware";
+} from "../controllers/authController.js";
+import { verifyToken } from "../middleware/authMiddleware.js";
+import upload from "../middleware/uploadMiddleware.js";
 
 const router = Router();
 
@@ -36,7 +36,7 @@ router.get(
     failureRedirect: "http://localhost:5173/login",
   }),
   (req, res) => {
-    const { token } = req.user as { token: string };
+    const { token } = req.user as unknown as { token: string };
 
     res.redirect(`http://localhost:5173/oauth-success?token=${token}`);
   },
@@ -56,7 +56,7 @@ router.get(
     failureRedirect: "http://localhost:5173/login",
   }),
   (req, res) => {
-    const { token } = req.user as { token: string };
+    const { token } = req.user as unknown as { token: string };
 
     res.redirect(`http://localhost:5173/oauth-success?token=${token}`);
   },

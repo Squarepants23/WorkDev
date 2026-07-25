@@ -1,13 +1,13 @@
 import { Router } from "express";
 
-import { verifyToken } from "../middleware/authMiddleware";
+import { verifyToken } from "../middleware/authMiddleware.js";
 import {
   createPost,
   getPosts,
   getPostById,
   updatePost,
   deletePost,
-} from "../controllers/postController";
+} from "../controllers/postController.js";
 
 const router = Router();
 

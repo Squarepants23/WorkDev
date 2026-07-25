@@ -5,8 +5,8 @@ import {
   updateProfile,
   getAllUsers,
   getUserById,
-} from "../controllers/userController";
-import { verifyToken } from "../middleware/authMiddleware";
+} from "../controllers/userController.js";
+import { verifyToken } from "../middleware/authMiddleware.js";
 
 const router = Router();
 

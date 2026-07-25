@@ -1,14 +1,11 @@
 import type { Response } from "express";
-import type { AuthRequest } from "../middleware/authMiddleware";
+import type { AuthRequest } from "../middleware/authMiddleware.js";
 
-import Like from "../models/Like";
+import Like from "../models/Like.js";
 
-export async function toggleLike(
-  req: AuthRequest,
-  res: Response
-) {
+export async function toggleLike(req: AuthRequest, res: Response) {
   try {
-    const { id } = req.params;
+    const id = req.params.id as string;
 
     const existingLike = await Like.findOne({
       user: req.user?.id,
@@ -42,12 +39,9 @@ export async function toggleLike(
   }
 }
 
-export async function getLikeInfo(
-  req: AuthRequest,
-  res: Response
-) {
+export async function getLikeInfo(req: AuthRequest, res: Response) {
   try {
-    const { id } = req.params;
+    const id = req.params.id as string;
 
     const likeCount = await Like.countDocuments({
       project: id,

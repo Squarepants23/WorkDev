@@ -1,15 +1,12 @@
 import type { Response } from "express";
-import type { AuthRequest } from "../middleware/authMiddleware";
+import type { AuthRequest } from "../middleware/authMiddleware.js";
 
-import Comment from "../models/Comment";
-import Project from "../models/Project";
+import Comment from "../models/Comment.js";
+import Project from "../models/Project.js";
 
-export async function createComment(
-  req: AuthRequest,
-  res: Response
-) {
+export async function createComment(req: AuthRequest, res: Response) {
   try {
-    const { id } = req.params;
+    const id = req.params.id as string;
     const { content } = req.body;
 
     const project = await Project.findById(id);
@@ -39,12 +36,9 @@ export async function createComment(
   }
 }
 
-export async function getComments(
-  req: AuthRequest,
-  res: Response
-) {
+export async function getComments(req: AuthRequest, res: Response) {
   try {
-    const { id } = req.params;
+    const id = req.params.id as string;
 
     const comments = await Comment.find({
       project: id,
@@ -64,10 +58,7 @@ export async function getComments(
   }
 }
 
-export async function deleteComment(
-  req: AuthRequest,
-  res: Response
-) {
+export async function deleteComment(req: AuthRequest, res: Response) {
   try {
     const { commentId } = req.params;
 
@@ -99,10 +90,7 @@ export async function deleteComment(
   }
 }
 
-export async function updateComment(
-  req: AuthRequest,
-  res: Response
-) {
+export async function updateComment(req: AuthRequest, res: Response) {
   try {
     const { commentId } = req.params;
     const { content } = req.body;

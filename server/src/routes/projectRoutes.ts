@@ -7,19 +7,19 @@ import {
   getProjectById,
   updateProject,
   deleteProject,
-} from "../controllers/projectController";
+} from "../controllers/projectController.js";
 
 import {
   createComment,
   getComments,
   deleteComment,
   updateComment,
-} from "../controllers/commentController";
+} from "../controllers/commentController.js";
 
-import { toggleLike, getLikeInfo } from "../controllers/likeController";
+import { toggleLike, getLikeInfo } from "../controllers/likeController.js";
 
-import { verifyToken } from "../middleware/authMiddleware";
-import uploadProject from "../middleware/uploadProject";
+import { verifyToken } from "../middleware/authMiddleware.js";
+import uploadProject from "../middleware/uploadProject.js";
 
 const router = Router();
 

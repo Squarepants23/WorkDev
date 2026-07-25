@@ -1,0 +1,14 @@
+{
+  "name": "coding-community",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "npm run build:server && npm run build:client",
+    "build:server": "npm --prefix server run build",
+    "build:client": "npm --prefix client run build"
+  },
+  "dependencies": {
+    "serverless-http": "^4.0.0"
+  }
+}

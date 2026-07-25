@@ -1,7 +1,7 @@
 import type { Request, Response } from "express";
 
-import User from "../models/User";
-import type { AuthRequest } from "../middleware/authMiddleware";
+import User from "../models/User.js";
+import type { AuthRequest } from "../middleware/authMiddleware.js";
 
 export async function getProfile(req: AuthRequest, res: Response) {
   try {

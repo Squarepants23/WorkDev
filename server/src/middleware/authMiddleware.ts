@@ -1,55 +1,44 @@
-import type { Request, Response, NextFunction } from "express";
+import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 
-export interface AuthRequest extends Request {
-  user?: {
-    id: string;
-    role: string;
-  };
-
-  file?: Express.Multer.File;
-}
+export interface AuthRequest extends Request {}
 
 export function verifyToken(
-  req: AuthRequest,
+  req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) {
+  const authHeader = req.headers.authorization;
+
+  if (!authHeader || !authHeader.startsWith("Bearer ")) {
+    return res.status(401).json({
+      message: "Access token required",
+    });
+  }
+
+  const token = authHeader.split(" ")[1];
+
+  if (!token) {
+    return res.status(401).json({
+      message: "Invalid token",
+    });
+  }
+
   try {
-    const authHeader = req.headers.authorization;
-
-    if (!authHeader) {
-      return res.status(401).json({
-        message: "Token tidak ditemukan.",
-      });
-    }
-
-    const token = authHeader.split(" ")[1];
-
-    if (!token) {
-      return res.status(401).json({
-        message: "Token tidak valid.",
-      });
-    }
-
     const decoded = jwt.verify(
       token,
-      process.env.JWT_SECRET || "workdev-super-secret-key"
-    ) as jwt.JwtPayload;
-
-    console.log("Decoded Token:", decoded);
-
-    req.user = {
-      id: decoded.id as string,
-      role: decoded.role as string,
+      process.env.JWT_SECRET || "secret",
+    ) as {
+      id: string;
+      role: string;
     };
 
-    next();
-  } catch (error) {
-    console.error(error);
+    req.user = decoded;
 
+    next();
+  } catch {
     return res.status(401).json({
-      message: "Token tidak valid.",
+      message: "Invalid or expired token",
     });
   }
 }

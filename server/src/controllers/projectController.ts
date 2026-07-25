@@ -1,6 +1,6 @@
 import type { Request, Response } from "express";
-import Project from "../models/Project";
-import type { AuthRequest } from "../middleware/authMiddleware";
+import Project from "../models/Project.js";
+import type { AuthRequest } from "../middleware/authMiddleware.js";
 
 export async function getAllProjects(
   _req: Request,

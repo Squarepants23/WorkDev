@@ -3,14 +3,14 @@ import cors from "cors";
 import path from "path";
 
 import session from "express-session";
-import passport from "./config/passport";
+import passport from "./config/passport.js";
 
-import authRoutes from "./routes/authRoutes";
-import dashboardRoutes from "./routes/dashboardRoutes";
-import activityRoutes from "./routes/activityRoutes";
-import postRoutes from "./routes/postRoutes";
-import projectRoutes from "./routes/projectRoutes";
-import userRoutes from "./routes/userRoutes";
+import authRoutes from "./routes/authRoutes.js";
+import dashboardRoutes from "./routes/dashboardRoutes.js";
+import activityRoutes from "./routes/activityRoutes.js";
+import postRoutes from "./routes/postRoutes.js";
+import projectRoutes from "./routes/projectRoutes.js";
+import userRoutes from "./routes/userRoutes.js";
 
 const app = express();
 
