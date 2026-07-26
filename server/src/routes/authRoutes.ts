@@ -62,6 +62,12 @@ router.get(
   },
 );
 
+router.get("/test", (_req, res) => {
+  res.json({
+    message: "Auth route works",
+  });
+});
+
 router.get("/me", verifyToken, me);
 
 router.post("/offline", verifyToken, setOffline);

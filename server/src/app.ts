@@ -33,6 +33,11 @@ app.use(
   express.static(path.join(process.cwd(), "uploads"))
 );
 
+app.use((req, _res, next) => {
+  console.log("REQUEST MASUK:", req.method, req.originalUrl);
+  next();
+});
+
 app.use("/api/auth", authRoutes);
 app.use("/api/dashboard", dashboardRoutes);
 app.use("/api/activity", activityRoutes);
