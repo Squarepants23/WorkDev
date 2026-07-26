@@ -1,9 +1,13 @@
 [build]
   command = "npm install && npm install --prefix client && npm run build:client"
   publish = "client/dist"
+  functions = "netlify/functions"
 
-[functions]  
-  directory = "netlify/functions"
+[[redirects]]
+  from = "/api/auth/*"
+  to = "/.netlify/functions/api/auth/:splat"
+  status = 200
+  force = true
 
 [[redirects]]
   from = "/api/*"
